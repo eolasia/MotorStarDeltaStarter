@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_Washing" Id="{c44c8330-ba9b-44dc-b7d6-2c009118cac6}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Washing
+VAR_INPUT
+	bExecute		: BOOL;
+END_VAR
+VAR_OUTPUT
+	bDone			: BOOL;
+	bError			: BOOL;
+	wErrorID		: BOOL;
+END_VAR
+VAR
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="FB_Washing">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

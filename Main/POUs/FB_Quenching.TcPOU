@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_Quenching" Id="{ae0e565e-f920-4c0b-a44c-4def04d45a19}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Quenching
+VAR_INPUT
+	bExecute		: BOOL;
+END_VAR
+VAR_OUTPUT
+	bDone			: BOOL;
+	bError			: BOOL;
+	wErrorID		: BOOL;
+END_VAR
+VAR
+	
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[]]></ST>
+    </Implementation>
+    <LineIds Name="FB_Quenching">
+      <LineId Id="9" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

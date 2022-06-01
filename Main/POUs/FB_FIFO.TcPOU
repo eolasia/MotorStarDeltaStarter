@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_FIFO" Id="{74fb2878-b1fb-45ac-be6e-feeeb28463ef}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_FIFO
+VAR_INPUT
+	bExecute		: BOOL;
+	stProcess		: reference TO ST_StageProcess;
+END_VAR
+VAR_IN_OUT
+	
+END_VAR
+VAR
+	temp : E_ProcessState;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF bExecute THEN
+	temp := stProcess.stage6;
+	stProcess.stage6 := stProcess.stage5;
+	stProcess.stage5 := stProcess.stage4;
+	stProcess.stage4 := stProcess.stage3;
+	stProcess.stage3 := stProcess.stage2;
+	stProcess.stage2 := stProcess.stage1;
+	stProcess.stage1 := temp;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="FB_FIFO">
+      <LineId Id="9" Count="0" />
+      <LineId Id="20" Count="0" />
+      <LineId Id="23" Count="5" />
+      <LineId Id="21" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

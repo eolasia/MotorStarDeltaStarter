@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DownloadTask>
+  <ProjectInfo
+    DeviceVersion="15.1.0.0"
+    CreationTime="2022-05-28 08:34:52 (UTC)"
+    Runtime="COLORADO"
+    RtProjectName="FlyingSawBasicV2.HMI_FS[TP1500 Comfort]"
+    RtProjectFolderName="FlyingSawBasicV2.HMI_FS[TP1500 Comfort]"
+    DeviceType="TP1500 Comfort"
+    DisplayOrientation="0"
+    RTReleaseNo="15.1.0.0"
+    ImageReleaseNo="15.1.0.0"
+    RTCV="15.1.0.0"
+    PRCV="15.1.0.0"
+    FirmwareFileName=""
+    RuntimeFileName=""
+    RuntimeAddonFolderName="CP_15_19_22" />
+  <FullDownload>pdata.fwc</FullDownload>
+  <FullDownload
+    type="ADMINDATA">pdata.pwx</FullDownload>
+  <FullDownload>ProjectSettings.hsf</FullDownload>
+  <FullDownload>DeviceSettings.hsf</FullDownload>
+</DownloadTask>

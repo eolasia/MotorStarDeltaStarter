@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_AirBlow" Id="{b1b50801-06ee-4f09-a7cc-e81d42471be1}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_AirBlow
+VAR_INPUT
+	bExecute			: BOOL;
+END_VAR
+VAR_OUTPUT
+	bDone				: BOOL;
+	bBusy				: BOOL;
+	bError				: BOOL;
+	wErrorID			: BOOL;
+END_VAR
+VAR
+	
+	_exeRisingEdge		: R_TRIG;
+	_exeFallingEdge		: F_TRIG;
+	_step				: INT := 0;
+END_VAR]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[_exeRisingEdge(CLK := bExecute);
+_exeFallingEdge(CLK := bExecute);
+
+IF _exeFallingEdge.Q THEN
+	bDone := FALSE;	
+END_IF
+
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_AirBlow">
+      <LineId Id="9" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="30" Count="3" />
+      <LineId Id="26" Count="0" />
+      <LineId Id="28" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

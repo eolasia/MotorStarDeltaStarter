@@ -1,0 +1,131 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <POU Name="FB_StarDeltaStarter" Id="{73e3ad8e-5525-4ffc-9b2f-f1af59ae1980}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_StarDeltaStarter
+VAR_INPUT
+	bStart, bStop						: BOOL;
+	tMainDelay							: TIME := T#1S;
+	tStarDeltaDelay						: TIME := T#5S;
+END_VAR
+VAR_OUTPUT
+	bMainContactor, bStarContactor, bDeltaContactor		: BOOL;
+	sStateDesciption	: WSTRING;
+	bActive				: BOOL;
+	bBusy				: BOOL;
+	bDone				: BOOL;
+END_VAR
+VAR
+	_step				: INT := 0;
+	_MainTimer			: TON;
+	_StarDeltaTimer		: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE _step OF
+	0	:
+		sStateDesciption := "Step 0 : init Finished!";
+		bMainContactor := FALSE;
+		bStarContactor := FALSE;
+		bDeltaContactor := FALSE;
+		_MainTimer(IN := FALSE);
+		IF bStart THEN
+			_step := 10;
+		END_IF
+	10	:
+		IF bStop THEN
+			_step := 0;
+		END_IF
+		sStateDesciption := "Step 10 : Main contactor ON then delay!";
+		bMainContactor := TRUE;
+		_MainTimer(IN := TRUE, PT := tMainDelay);
+		IF _MainTimer.Q THEN
+			_MainTimer(IN := FALSE);
+			_step := 11;
+		END_IF
+	11	:
+		sStateDesciption := "Step 11 : Main contactor ON, star contactor delay!";
+		bStarContactor := TRUE;
+		_StarDeltaTimer(IN := TRUE, PT := tStarDeltaDelay);
+		IF _StarDeltaTimer.Q THEN
+			_StarDeltaTimer(IN := FALSE);
+			bStarContactor := FALSE;
+			_step := 110;
+		END_IF
+		IF bStop THEN
+			_StarDeltaTimer(IN := FALSE);
+			bStarContactor := FALSE;
+			_step := 13;
+		END_IF
+	110	:
+		sStateDesciption := "Step 110 : Main contactor ON, switch delay!";
+		_MainTimer(IN := TRUE, PT := T#1S);
+		IF _MainTimer.Q THEN
+			_MainTimer(IN := FALSE);
+			_step := 12;
+		END_IF
+		IF bStop THEN
+			_MainTimer(IN := FALSE);
+			bStarContactor := FALSE;
+			_step := 13;
+		END_IF
+	12	:
+		sStateDesciption := "Step 12 : Main and delta contactor ON!";
+		bDeltaContactor := TRUE;
+		IF bStop THEN
+			bDeltaContactor :=FALSE;
+			_step := 13;
+		END_IF
+	13	:
+		sStateDesciption := "Step 13 : Delta OFF, delay Main OFF!";
+		_MainTimer(IN := TRUE, PT := tMainDelay);
+		IF _MainTimer.Q THEN
+			_MainTimer(IN := FALSE);
+			_step := 0;
+		END_IF
+END_CASE
+
+
+	bDone := _step = 12;
+	bActive := NOT (_step = 0);
+	bBusy := bActive;
+]]></ST>
+    </Implementation>
+    <LineIds Name="FB_StarDeltaStarter">
+      <LineId Id="206" Count="1" />
+      <LineId Id="244" Count="0" />
+      <LineId Id="208" Count="7" />
+      <LineId Id="277" Count="1" />
+      <LineId Id="276" Count="0" />
+      <LineId Id="245" Count="0" />
+      <LineId Id="216" Count="6" />
+      <LineId Id="246" Count="0" />
+      <LineId Id="223" Count="6" />
+      <LineId Id="282" Count="0" />
+      <LineId Id="285" Count="0" />
+      <LineId Id="283" Count="1" />
+      <LineId Id="281" Count="0" />
+      <LineId Id="264" Count="0" />
+      <LineId Id="272" Count="0" />
+      <LineId Id="265" Count="0" />
+      <LineId Id="267" Count="1" />
+      <LineId Id="270" Count="0" />
+      <LineId Id="269" Count="0" />
+      <LineId Id="287" Count="3" />
+      <LineId Id="286" Count="0" />
+      <LineId Id="230" Count="0" />
+      <LineId Id="247" Count="0" />
+      <LineId Id="231" Count="1" />
+      <LineId Id="280" Count="0" />
+      <LineId Id="233" Count="2" />
+      <LineId Id="248" Count="0" />
+      <LineId Id="237" Count="4" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="294" Count="0" />
+      <LineId Id="293" Count="0" />
+      <LineId Id="295" Count="0" />
+      <LineId Id="299" Count="0" />
+      <LineId Id="301" Count="0" />
+      <LineId Id="296" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

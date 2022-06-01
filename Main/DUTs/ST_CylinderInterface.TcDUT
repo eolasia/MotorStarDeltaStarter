@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <DUT Name="ST_CylinderInterface" Id="{b641ea5a-eb8c-4796-b0f6-9c04a242a235}">
+    <Declaration><![CDATA[TYPE ST_CylinderInterface :
+STRUCT
+	bCmd			: BOOL;
+	bAtHomeSensor	: BOOL;
+	bAtWorkSensor	: BOOL;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

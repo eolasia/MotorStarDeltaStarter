@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_Transfer" Id="{64a0402f-8352-4dbd-9e7d-b98eb4c48e03}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Transfer
+VAR_INPUT
+	bExecute		: BOOL;
+	stProcess		: REFERENCE TO ST_StageProcess;
+	
+	stSwing				: ST_CylinderInterface;
+	fbSwing				: FB_Cylinder;
+	stIncome			: ST_CylinderInterface;
+	fbIncome			: FB_Cylinder;
+	stIncomeCapture		: ST_CylinderInterface;
+	fbIncomeCapture		: FB_Cylinder;
+	stOutcome			: ST_CylinderInterface;
+	fbOutcome			: FB_Cylinder;
+	stOutcomeCapture	: ST_CylinderInterface;
+	fbOutcomeCapture	: FB_Cylinder;
+	
+	bIncomeWorkOK		: BOOL;
+	bOutcomeWorkOK		: BOOL;
+END_VAR
+VAR_OUTPUT
+	bDone				: BOOL;
+	bBusy				: BOOL;
+	bActive				: BOOL;
+	bError				: BOOL;
+	sStateDiscrption	: WSTRING;
+	wErrorID			: WORD;
+END_VAR
+VAR
+	_step 					: INT := 0;
+	_timer					: TON;
+	_tSwingDelay			: TIME;
+	_tIncomeDelay			: TIME;
+	_tIncomeCaptureDelay	: TIME;
+	_tOutcomedelay			: TIME;
+	_tOutcomeCaptureDelay	: TIME;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE _step OF 
+	0	: 
+		sStateDiscrption := "State 0 : Init"; 	
+		bDone := FALSE;
+		bBusy := FALSE;
+		bActive := FALSE;
+		bError := FALSE;
+		_timer(IN := FALSE);
+		IF bActive THEN
+			bBusy := TRUE;
+			_step := 1;
+		END_IF
+	1	:
+		sStateDiscrption := "State 1 : ";
+		stSwing.bCmd := TRUE;
+		IF 
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="FB_Transfer">
+      <LineId Id="9" Count="0" />
+      <LineId Id="41" Count="0" />
+      <LineId Id="44" Count="0" />
+      <LineId Id="43" Count="0" />
+      <LineId Id="45" Count="2" />
+      <LineId Id="60" Count="0" />
+      <LineId Id="48" Count="1" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="52" Count="1" />
+      <LineId Id="59" Count="0" />
+      <LineId Id="61" Count="0" />
+      <LineId Id="42" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

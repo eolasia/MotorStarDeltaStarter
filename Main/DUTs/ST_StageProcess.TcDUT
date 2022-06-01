@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.11">
+  <DUT Name="ST_StageProcess" Id="{92eff0c6-478b-4944-80e4-d932d8314ed9}">
+    <Declaration><![CDATA[TYPE ST_StageProcess :
+STRUCT
+	stage1			: E_ProcessState;
+	stage2			: E_ProcessState;
+	stage3			: E_ProcessState;
+	stage4			: E_ProcessState;
+	stage5			: E_ProcessState;
+	stage6			: E_ProcessState;
+END_STRUCT
+END_TYPE
+]]></Declaration>
+  </DUT>
+</TcPlcObject>

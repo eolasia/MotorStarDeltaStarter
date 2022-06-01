@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <GVL Name="GVL" Id="{8a25c0a4-5f78-49e2-a97d-76ca38ee255e}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	iStartPB			: BOOL;
+	iStopPB				: BOOL;
+	iMainDelay			: TIME;
+	iSwitchDelay		: TIME;
+	
+	oMainContactor		: BOOL;
+	oStarContactor		: BOOL;
+	oDeltaContactor		: BOOL;
+	oState				: WSTRING;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="FB_Cylinder" Id="{f2935eea-a8fb-4477-afd0-e24e0b56f792}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK FB_Cylinder
+VAR_INPUT
+	bWorkReq			: BOOL;
+	bAtHomeSensor		: BOOL;
+	bAtWorkSensor		: BOOL;
+	tActionDelay		: TIME := T#2S;
+END_VAR
+VAR_OUTPUT
+	bWorkCmd			: BOOL;
+	bIsAtHome			: BOOL;
+	bIsAtWork			: BOOL;
+	bError				: BOOL;
+	sStepDiscription	: WSTRING;
+END_VAR
+VAR
+	_step				: INT := 0;
+	_timer				: TON;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[CASE _step OF
+	0	:
+		sStepDiscription := "State 0 : init";
+		bIsAtHome := TRUE;
+		bIsAtWork := FALSE;
+		bError := FALSE;	
+		IF bWorkReq THEN
+			_step := 1;
+		END_IF
+	1	:
+		sStepDiscription := "State 0 : Go to work position and wait for in_position";
+		bWorkCmd := TRUE;
+		_timer(IN := TRUE, PT := tActionDelay);
+		IF _timer.Q AND NOT bAtWorkSensor THEN
+			_timer(IN := FALSE);
+			_step := 99;
+		END_IF
+		IF bAtWorkSensor THEN
+			_timer(IN := FALSE);
+			_step := 2;
+		END_IF
+	2	:
+		sStepDiscription := "State 1 : In work position";
+		
+END_CASE]]></ST>
+    </Implementation>
+    <LineIds Name="FB_Cylinder">
+      <LineId Id="9" Count="0" />
+      <LineId Id="27" Count="0" />
+      <LineId Id="30" Count="0" />
+      <LineId Id="33" Count="2" />
+      <LineId Id="29" Count="0" />
+      <LineId Id="36" Count="1" />
+      <LineId Id="39" Count="5" />
+      <LineId Id="49" Count="0" />
+      <LineId Id="45" Count="1" />
+      <LineId Id="50" Count="0" />
+      <LineId Id="52" Count="0" />
+      <LineId Id="51" Count="0" />
+      <LineId Id="53" Count="2" />
+      <LineId Id="28" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.10">
+  <POU Name="MAIN" Id="{4d3cd65a-3d36-4163-b8ce-3aa108fddf81}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM MAIN
+VAR
+	fbStarter		: FB_StarDeltaStarter;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[fbStarter(
+	bStart:= GVL.iStartPB, 
+	bStop:= GVL.iStopPB, 
+	tMainDelay:= T#1S, 
+	tStarDeltaDelay:= T#5S, 
+	bMainContactor=> GVL.oMainContactor, 
+	bStarContactor=> GVL.oStarContactor, 
+	bDeltaContactor=> GVL.oDeltaContactor,
+	sStateDesciption => GVL.oState);]]></ST>
+    </Implementation>
+    <LineIds Name="MAIN">
+      <LineId Id="7" Count="6" />
+      <LineId Id="2" Count="0" />
+      <LineId Id="15" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>
